@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="d-flex justify-content-end mb-5">
+    <button
+      type="button"
+      class="btn btn-dark"
+      (click)="openServiceModal(addServiceModal)"
+    >
+      ADD NEW
+    </button>
+  </div>
+  <div class="table-responsive bg-white">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Service Name</th>
+          <th scope="col">Treatment Type</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Retail Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of serviceList">
+          <th scope="row">{{ service.serviceName }}</th>
+          <td>{{ service.treatmentType }}</td>
+          <td>{{ service.duration }}</td>
+          <td>{{ service.retailPrice }}</td>
+          <td>
+            <button
+              title="Edit"
+              type="button"
+              class="btn btn-link p-0"
+              (click)="openServiceModal(addServiceModal, service)"
+            >
+              <span class="fas fa-edit"></span></button
+            >&nbsp;
+            <button
+              title="Delete"
+              type="button"
+              class="btn btn-link p-0"
+              (click)="deleteService(service)"
+            >
+              <span class="fa fa-trash"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Modal-->
+<ng-template #addServiceModal let-modal>
+  <div class="modal-content">
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewLabel">
+          {{ serviceId ? "Edit Service" : "Add Service" }}
+        </h5>
+        <button
+          class="button"
+          class="close"
+          (click)="modalReference.close()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="serviceName">Service Name</label>
+          <select
+            class="form-control"
+            id="serviceName"
+            formControlName="serviceName"
+            (change)="onServiceChange($event.target.value)"
+          >
+            <option value="">--Select service --</option>
+            <option
+              *ngFor="let service of services"
+              [value]="service.treatmentType"
+              >{{ service.serviceName }}</option
+            >
+          </select>
+          <span
+            class="error"
+            *ngIf="
+              serviceForm.get('serviceName').errors?.required && isSubmitted
+            "
+            >Service Name is Required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="treatmentType">Treatment Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="treatmentType"
+            formControlName="treatmentType"
+            readonly
+          />
+          <span
+            class="error"
+            *ngIf="
+              serviceForm.get('treatmentType').errors?.required && isSubmitted
+            "
+            >Treatment type is Required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <input
+            type="text"
+            class="form-control"
+            id="duration"
+            formControlName="duration"
+          />
+          <span
+            class="error"
+            *ngIf="serviceForm.get('duration').errors?.required && isSubmitted"
+            >Duration is Required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="retailPrice">Retail Price</label>
+          <input
+            type="text"
+            class="form-control"
+            id="retailPrice"
+            formControlName="retailPrice"
+          />
+          <span
+            class="error"
+            *ngIf="
+              serviceForm.get('retailPrice').errors?.required && isSubmitted
+            "
+            >Retail Price is Required</span
+          >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-dark btn-block">SAVE</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

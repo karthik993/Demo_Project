@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.register-container {
+  width: 400px;
+  background-color: #fff;
+  padding: 40px 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  h4 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .confirm-btn {
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  .btn-dark {
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.close {
+  outline: none;
+}
+
+#confirm-modal {
+  &.modal-body {
+    background-color: #eeeff1;
+  }
+}
+
+.success-register {
+  text-align: center;
+  justify-content: center;
+}

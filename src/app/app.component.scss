@@ -1,0 +1,93 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  #main-area {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-top: 70px;
+
+    .navbar {
+      height: 50px;
+      border-bottom: 1px solid #dee3e7;
+
+      .navbar-brand {
+        padding: 0;
+        font-weight: bold;
+        font-size: 22px;
+      }
+
+      a {
+        columns: #000000;
+      }
+
+      .profile-icon {
+        background-color: #a5dff8;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        display: inline-flex;
+      }
+    }
+  }
+
+  #sidebar {
+    background-color: #1a263a;
+    color: #fff;
+    min-height: 100vh;
+    white-space: nowrap;
+
+    .menu-icon {
+      height: 50px;
+      padding: 12px 14px;
+    }
+
+    .menu-open {
+      width: 200px;
+      max-width: 200px;
+      transition: all 0.1s;
+    }
+
+    .menu-default {
+      width: 50px;
+      max-width: 50px;
+      color: #fff;
+      transition: all 0.1s;
+      text-align: center;
+      span {
+        display: none;
+      }
+    }
+    .menu-bar-wrapper {
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 4px 14px;
+        &:hover {
+          background-color: #3f4b5f;
+        }
+      }
+      a {
+        color: #ffffff;
+        font-size: 22px;
+      }
+    }
+  }
+  .menu-open-push {
+    left: 200px;
+  }
+
+  .menu-default-push {
+    left: 50px;
+  }
+}
+.app-calendar {
+  margin: 0 30px;
+  .fc-scroller {
+    height: calc(100vh - 250px);
+  }
+}

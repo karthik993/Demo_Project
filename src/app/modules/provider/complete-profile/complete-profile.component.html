@@ -1,0 +1,305 @@
+<div class="container profile-wrapper">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h5 class="title">Personal Details</h5>
+      <p class="description">
+        Set your name and contact information, the email address entered here is
+        used for your login access
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="bg-white">
+        <div class="d-flex align-items-center flex-column mb-4">
+          <div class="img-wrapper">
+            <img
+              src="..."
+              alt="..."
+              height="75px"
+              weight="75px"
+              class="rounded-circle"
+            />
+          </div>
+          <a href="">Uploaded Profile Photo</a>
+        </div>
+        <form [formGroup]="completeProfileForm">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+              />
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('firstName').errors?.required &&
+                  isSubmitted
+                "
+                >FirstName is Required</span
+              >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                formControlName="lastName"
+              />
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('lastName').errors?.required &&
+                  isSubmitted
+                "
+                >LastName is Required</span
+              >
+            </div>
+            <div class="form-group col-md-12">
+              <label for="mobile">Mobile</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">+61</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mobile"
+                  formControlName="mobile"
+                  aria-describedby="phone"
+                />
+                <div *ngIf="!isNumberConfirmed" class="input-group-prepend">
+                  <span class="input-group-text confirm" id="basic-addon1"
+                    ><button
+                      class="confirm-btn"
+                      (click)="openConfirmModal(confirmModal, 'mobile')"
+                    >
+                      Confirm
+                    </button></span
+                  >
+                </div>
+              </div>
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('mobile').errors?.required &&
+                  isSubmitted
+                "
+                >Mobile Number is Required</span
+              >
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('mobile').errors?.minlength
+                    ?.requiredLength ||
+                  completeProfileForm.get('mobile').errors?.maxlength
+                    ?.requiredLength ||
+                  completeProfileForm.get('mobile').errors?.pattern
+                    ?.requiredPattern
+                "
+              >
+                Please enter 10 digit mobile number</span
+              >
+            </div>
+            <div class="form-group col-md-12">
+              <label for="email">Email</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                />
+                <div *ngIf="!isEmailConfirmed" class="input-group-prepend">
+                  <span class="input-group-text confirm" id="basic-addon1"
+                    ><button
+                      class="confirm-btn"
+                      (click)="openConfirmModal(confirmModal, 'email')"
+                    >
+                      Confirm
+                    </button></span
+                  >
+                </div>
+              </div>
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('email').errors?.required &&
+                  isSubmitted
+                "
+                >Email is Required</span
+              >
+              <span
+                class="error"
+                *ngIf="
+                  completeProfileForm.get('email').errors?.pattern
+                    ?.requiredPattern
+                "
+                >Invalid Email Address</span
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h5 class="title">Address Details</h5>
+      <p class="description">
+        Set your Address Information
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="bg-white">
+        <form [formGroup]="addressForm">
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              formControlName="address"
+            />
+            <span
+              class="error"
+              *ngIf="addressForm.get('address').errors?.required && isSubmitted"
+              >Address is Required</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pincode"
+              formControlName="pincode"
+            />
+            <span
+              class="error"
+              *ngIf="addressForm.get('pincode').errors?.required && isSubmitted"
+              >Pincode is Required</span
+            >
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="state">State</label>
+              <input
+                type="text"
+                class="form-control"
+                id="state"
+                formControlName="state"
+              />
+              <span
+                class="error"
+                *ngIf="addressForm.get('state').errors?.required && isSubmitted"
+                >State is Required</span
+              >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                formControlName="country"
+                readonly
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h5 class="title">Change Password</h5>
+      <p class="description">
+        To make an update, enter your existing password followed by a new one,
+        If you don't know your existing password, you can logout and use the
+        Reset Password link on the Log in page.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div class="bg-white">
+        <form [formGroup]="passwordForm">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="currentPassword"
+              formControlName="currentPassword"
+            />
+            <span
+              class="error"
+              *ngIf="
+                passwordForm.get('currentPassword').errors?.required &&
+                isSubmitted
+              "
+              >Current Password is Required</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="newPassword"
+              formControlName="newPassword"
+            />
+            <span
+              class="error"
+              *ngIf="
+                passwordForm.get('newPassword').errors?.required && isSubmitted
+              "
+              >New Password is Required</span
+            >
+          </div>
+          <div class="form-group">
+            <label for="verifyPassword">Verify Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="verifyPassword"
+              formControlName="confirmPassword"
+            />
+            <span
+              class="error"
+              *ngIf="
+                passwordForm.get('confirmPassword').errors?.required &&
+                isSubmitted
+              "
+              >Verify Password is Required</span
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end mb-5">
+    <button type="button" (click)="onSave()" class="btn btn-dark px-5">
+      SAVE
+    </button>
+  </div>
+</div>
+
+<!--Modal-->
+<ng-template #confirmModal let-modal>
+  <div class="modal-body" id="confirm-modal">
+    <button
+      class="button"
+      (click)="modalReference.close()"
+      class="close"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <app-confirmation
+      [verificationProp]="verificationProp"
+      [data]="data"
+    ></app-confirmation>
+  </div>
+</ng-template>

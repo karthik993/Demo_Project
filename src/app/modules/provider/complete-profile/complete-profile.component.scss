@@ -1,0 +1,47 @@
+.profile-wrapper {
+  .input-group-text {
+    select {
+      height: auto;
+    }
+  }
+  .img-wrapper {
+    height: 150px;
+    width: 150px;
+    border: 1px solid #dee3e7;
+    border-radius: 50%;
+  }
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  .confirm {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .confirm-btn {
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  .description {
+    color: #67768c;
+  }
+  .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .bg-white {
+    padding: 20px;
+  }
+}
+
+.close {
+  outline: none;
+}
+
+#confirm-modal {
+  &.modal-body {
+    background-color: #eeeff1;
+  }
+}

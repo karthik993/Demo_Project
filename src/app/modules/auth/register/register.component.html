@@ -1,0 +1,159 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit(succesModal)"
+  class="register-container"
+>
+  <h4>Registration</h4>
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      formControlName="firstName"
+    />
+    <span
+      class="error"
+      *ngIf="registerForm.get('firstName').errors?.required && isSubmitted"
+      >FirstName is Required</span
+    >
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lastName"
+      formControlName="lastName"
+    />
+    <span
+      class="error"
+      *ngIf="registerForm.get('lastName').errors?.required && isSubmitted"
+      >LastName is Required</span
+    >
+  </div>
+  <div class="form-group">
+    <label for="mobile">Mobile</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">+61</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="mobile"
+        formControlName="mobile"
+      />
+      <div
+        *ngIf="!isNumberConfirmed && this.registerForm.get('mobile').valid"
+        class="input-group-prepend"
+      >
+        <span class="input-group-text confirm" id="basic-addon1"
+          ><button
+            type="button"
+            class="confirm-btn"
+            (click)="openConfirmModal(confirmModal, 'mobile')"
+          >
+            Confirm
+          </button></span
+        >
+      </div>
+    </div>
+    <span
+      class="error"
+      *ngIf="registerForm.get('mobile').errors?.required && isSubmitted"
+      >Mobile is Required</span
+    >
+    <span
+      class="error"
+      *ngIf="
+        registerForm.get('mobile').errors?.minlength?.requiredLength ||
+        registerForm.get('mobile').errors?.maxlength?.requiredLength ||
+        registerForm.get('mobile').errors?.pattern?.requiredPattern
+      "
+    >
+      Please enter 10 digit mobile number</span
+    >
+  </div>
+  <div class="form-group">
+    <label for="loginName">Email</label>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        *ngIf="!isEmailConfirmed && this.registerForm.get('email').valid"
+        class="input-group-prepend"
+      >
+        <span class="input-group-text confirm" id="basic-addon1"
+          ><button
+            type="button"
+            class="confirm-btn"
+            (click)="openConfirmModal(confirmModal, 'email')"
+          >
+            Confirm
+          </button></span
+        >
+      </div>
+    </div>
+    <span
+      class="error"
+      *ngIf="registerForm.get('email').errors?.required && isSubmitted"
+      >Email is Required</span
+    >
+    <span
+      class="error"
+      *ngIf="registerForm.get('email').errors?.pattern?.requiredPattern"
+      >Invalid Email Address</span
+    >
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      formControlName="password"
+    />
+    <span
+      class="error"
+      *ngIf="registerForm.get('password').errors?.required && isSubmitted"
+      >Password is Required</span
+    >
+  </div>
+  <button type="submit" class="btn btn-dark btn-block">SUBMIT</button>
+</form>
+
+<!--Modal-->
+<ng-template #succesModal let-modal>
+  <div class="modal-body" id="success-modal">
+    <div class="success-register">
+      <p><span class="fas fa-check-circle fa-7x"></span></p>
+      <p>Successfully Registered!</p>
+      <p>
+        <button class="btn btn-primary" (click)="routeToLogin()">Login</button>
+      </p>
+    </div>
+  </div>
+</ng-template>
+
+<!--Modal-->
+<ng-template #confirmModal let-modal>
+  <div class="modal-body" id="confirm-modal">
+    <button
+      class="button"
+      (click)="modalReference.close()"
+      class="close"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <app-confirmation
+      [verificationProp]="verificationProp"
+      [data]="data"
+    ></app-confirmation>
+  </div>
+</ng-template>

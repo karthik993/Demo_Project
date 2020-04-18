@@ -1,0 +1,25 @@
+<div class="otp-wrapper">
+  <h4 class="otp-header">OTP Verification</h4>
+  <p>Please enter your OTP received to</p>
+  <h6 class="email">
+    {{ data }}
+  </h6>
+  <form [formGroup]="otpForm">
+    <div class="otp-form">
+      <div *ngFor="let input of formInput; index as i">
+        <input
+          #formRow
+          type="text"
+          formControlName="{{ input }}"
+          class="form-control"
+          maxlength="1"
+          (keyup)="keyUpEvent($event, i)"
+        />
+      </div>
+    </div>
+  </form>
+  <p *ngIf="isInvalidOtp" class="text-danger">Invalid OTP</p>
+  <button class="btn resend-btn">
+    RESEND OTP
+  </button>
+</div>

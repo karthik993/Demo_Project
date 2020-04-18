@@ -1,0 +1,20 @@
+.app-top {
+  margin: 0 0 3em;
+}
+
+.app-calendar {
+  margin: 0 30px;
+  .fc-scroller {
+    height: calc(100vh - 250px) !important;
+  }
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 30px 30px;
+
+  .btn {
+    margin-right: 20px;
+    width: 200px;
+  }
+}
